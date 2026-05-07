@@ -16,7 +16,6 @@
         .dot { width:10px; height:10px; border-radius:50%; background:#22c55e; box-shadow:0 0 8px #22c55e; animation:pulse 2s infinite; }
         .card { background:var(--card); border-radius:16px; padding:20px; margin-bottom:16px; border:1px solid #333340; }
         label { display:block; font-size:13px; font-weight:500; color:var(--muted); margin-bottom:8px; }
-        select, input[type="range"] { width:100%; background:#25252f; border:1px solid #444456; border-radius:10px; padding:12px 14px; color:var(--text); font-size:15px; }
         .slider-container { display:flex; align-items:center; gap:12px; }
         .value { font-family:monospace; font-size:15px; min-width:42px; text-align:right; }
         .toggle { display:flex; align-items:center; justify-content:space-between; background:#25252f; border-radius:9999px; padding:4px; width:100%; }
@@ -34,22 +33,15 @@
 <body>
     <div class="header">
         <div class="logo">🎤</div>
-        <div>
-            <h1>Kick Voice Guard</h1>
-            <p style="font-size:13px;color:var(--muted);">v2.0 - Anti falsos positivos</p>
-        </div>
+        <div><h1>Kick Voice Guard</h1><p style="font-size:13px;color:var(--muted);">Detección avanzada v3.1</p></div>
     </div>
 
-    <div class="status">
-        <div class="dot"></div>
-        <span id="status-text">Listo • Esperando stream</span>
-    </div>
+    <div class="status"><div class="dot"></div><span id="status-text">Listo</span></div>
 
     <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
             <label>Extensión Activada</label>
             <label class="toggle">
-                <input type="checkbox" id="enable-toggle" checked style="display:none;">
                 <span class="toggle-btn active" id="enable-on">ON</span>
                 <span class="toggle-btn" id="enable-off">OFF</span>
             </label>
@@ -61,23 +53,9 @@
             <span class="toggle-btn" id="mode-reduce">REDUCCIÓN DE VOZ</span>
         </div>
 
-        <div class="slider-container">
-            <label style="flex:1;">Umbral de Confianza</label>
-            <input type="range" id="threshold-slider" min="0.5" max="0.95" step="0.01" value="0.85">
-            <span class="value" id="threshold-value">0.85</span>
-        </div>
-
-        <div class="slider-container">
-            <label style="flex:1;">Sensibilidad</label>
-            <input type="range" id="sensitivity-slider" min="0" max="1" step="0.01" value="0.35">
-            <span class="value" id="sensitivity-value">0.35</span>
-        </div>
-
-        <div id="reduction-container" class="slider-container" style="margin-top:12px;">
-            <label style="flex:1;">Reducción de Volumen %</label>
-            <input type="range" id="reduction-slider" min="30" max="90" step="5" value="65">
-            <span class="value" id="reduction-value">65%</span>
-        </div>
+        <div class="slider-container"><label style="flex:1;">Umbral de Confianza</label><input type="range" id="threshold-slider" min="0.5" max="0.95" step="0.01" value="0.82"><span class="value" id="threshold-value">0.82</span></div>
+        <div class="slider-container"><label style="flex:1;">Sensibilidad</label><input type="range" id="sensitivity-slider" min="0" max="1" step="0.01" value="0.50"><span class="value" id="sensitivity-value">0.50</span></div>
+        <div class="slider-container"><label style="flex:1;">Reducción de Volumen %</label><input type="range" id="reduction-slider" min="30" max="90" step="5" value="65"><span class="value" id="reduction-value">65%</span></div>
     </div>
 
     <div class="card">
@@ -85,18 +63,12 @@
         <div class="samples" id="samples-list"></div>
         
         <input type="file" id="sample-upload" accept="audio/*" multiple style="display:none;">
-        <button class="btn" id="add-sample-btn">
-            + Agregar Muestra de Voz (MP3/WAV)
-        </button>
-        <button class="btn btn-secondary" id="clear-samples" style="margin-top:8px;">
-            Borrar Todas las Muestras
-        </button>
+        <button class="btn" id="add-sample-btn">+ Agregar Muestra de Voz (MP3/WAV)</button>
+        <button class="btn btn-secondary" id="clear-samples" style="margin-top:8px;">Borrar Todas las Muestras</button>
     </div>
 
     <div class="card">
-        <div class="indicator" id="live-indicator">
-            <span id="detection-status">🔴 No se detectó voz objetivo</span>
-        </div>
+        <div class="indicator" id="live-indicator"><span id="detection-status">🔴 Esperando stream</span></div>
     </div>
 
     <script src="popup.js"></script>
