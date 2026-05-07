@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Kick Voice Guard - Advanced",
+  "short_name": "KVG Advanced",
+  "description": "Real-time specific speaker detection & audio control for Kick.com livestreams. 100% local, improved accuracy.",
+  "version": "2.0.0",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Kick Voice Guard"
+  },
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://kick.com/*"],
+      "js": [
+        "src/content/voiceDetection.js",
+        "src/content/audioProcessor.js",
+        "src/content/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["*://kick.com/*"],
+  "commands": {
+    "toggle-extension": {
+      "suggested_key": {
+        "default": "Alt+Shift+K"
+      },
+      "description": "Toggle extension on/off"
+    },
+    "toggle-mode": {
+      "suggested_key": {
+        "default": "Alt+M"
+      },
+      "description": "Switch between Full Mute and Voice Reduction"
+    }
+  }
+}
